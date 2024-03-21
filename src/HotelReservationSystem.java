@@ -114,11 +114,11 @@ public class HotelReservationSystem {
             String guestName = scanner.next();
 
             String sql = "SELECT Room_number FROM Reservation "+"WHERE Reservation_id = " +reservationId +
-                    "AND Guest_name = '"+ guestName +"'";
+                    " AND Guest_name = '"+ guestName +"'";
             try(Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
                 if(resultSet.next()){
-                    int roomNumber = resultSet.getInt("Room_Number");
+                    int roomNumber = resultSet.getInt("Room_number");
                     System.out.println("Room number for Reservation ID " +reservationId + "and Guest " +guestName + "is: " +roomNumber);
                 }else{
                     System.out.println("Reservation not found for given ID and guest name.");
@@ -186,7 +186,7 @@ public class HotelReservationSystem {
     }
     private static boolean reservationExists(Connection connection, int reservationId){
         try{
-            String sql = "SELECT Reservation_id FROM reservation WHERE Reservation_id = "+reservationId;
+            String sql = "SELECT Reservation_id FROM Reservation WHERE Reservation_id = "+reservationId;
             try(Statement statement = connection.createStatement()){
                 ResultSet resultSet = statement.executeQuery(sql);
                 return !resultSet.next();
@@ -198,7 +198,7 @@ public class HotelReservationSystem {
     }
 
     public static void exit() throws InterruptedException{
-        System.out.println("Existing System");
+        System.out.println("Exiting System");
         int i =5;
         while (i!=0){
             System.out.print(".");
